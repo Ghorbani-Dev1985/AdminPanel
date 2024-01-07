@@ -15,7 +15,7 @@ function App() {
      <main className=''>   
         <div className='grid grid-cols-12 gap-8'>
          <div className='col-span-2'><Sidebar /></div>
-         <div className='col-span-10'>{router}</div>
+         <div className='col-span-10 p-5 m-3 rounded-md bg-violet-50/25'>{router}</div>
         </div>
      </main>
     </>
