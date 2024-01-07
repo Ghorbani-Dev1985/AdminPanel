@@ -2,6 +2,7 @@
 import { Toaster } from 'react-hot-toast'
 import routes from './Routes'
 import { useRoutes } from 'react-router-dom'
+import Header from './Components/Header/Header'
 
 function App() {
   let router = useRoutes(routes)
@@ -9,6 +10,7 @@ function App() {
   return (
     <>
      <Toaster />
+     <Header />
       {router}
     </>
   )
