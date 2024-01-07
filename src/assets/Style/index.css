@@ -1,0 +1,514 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "Dana";
+    src: local("Dana"),
+      url("../fonts/Dana/woff2/DanaFaNum-Regular.woff2") format("woff2");
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Dana Medium";
+    src: local("Dana Medium"),
+      url("../fonts/Dana/woff2/DanaFaNum-Medium.woff2") format("woff2");
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Dana DemiBold";
+    src: local("Dana DemiBold"),
+      url("../fonts/Dana/woff2/DanaFaNum-DemiBold.woff2") format("woff2");
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Morabba Light";
+    src: local("Morabba Light"),
+      url("../fonts/Morabba/woff2/Morabba-Light.woff2") format("woff2");
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Morabba Medium";
+    src: local("Morabba Medium"),
+      url("../fonts/Morabba/woff2/Morabba-Medium.woff2") format("woff2");
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Morabba Bold";
+    src: local("Morabba Bold"),
+      url("../fonts/Morabba/woff2/Morabba-Bold.woff2") format("woff2");
+    font-display: swap;
+  }
+  * {
+    @apply p-0 m-0 box-border;
+  }
+  a{
+    @apply no-underline text-white
+  }
+  li{
+    @apply list-none
+  }
+  body {
+    @apply dark:bg-zinc-800 text-zinc-800 bg-white font-Dana text-lg overflow-x-hidden scroll-smooth scrollbar scrollbar-thumb-mainColor dark:scrollbar-thumb-gray-700 scrollbar-track-gray-100 dark:scrollbar-track-gray-400;
+  }
+}
+
+@layer components {
+  .CircleBubble {
+    @apply hidden md:flex justify-center items-center rounded-full border;
+  }
+  .CircleBubbleParent{
+	@apply absolute bottom-0 left-0 right-0 mx-auto translate-y-2/4;
+  }
+  .CircleBubble__lg {
+    @apply w-[12.6875rem] h-[12.6875rem] border-white/25;
+  }
+  .CircleBubble__md {
+    @apply w-[9.0625rem] h-[9.0625rem] border-white/50;
+  }
+  .CircleBubble__sm {
+    @apply w-[5.9375rem] h-[5.9375rem] border-white/80;
+  }
+  .swiper-button{
+    @apply w-9 h-9 md:w-10 md:h-10 bg-white dark:bg-zinc-700 text-zinc-700 dark:text-white rounded-full hover:bg-gray-300 dark:hover:bg-white dark:hover:text-zinc-700 cursor-pointer shadow-normal transition-colors;
+  }
+  .dir-ltr{
+    direction: ltr;
+    text-align: left;
+  }
+  .Services::after, .Services::before{
+    content: "";
+    display: block;
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    background-color: #D1D5DB;
+  }
+  html.dark .Services::after, html.dark .Services::before{
+    background-color: rgba(255,255,255,0.1);
+  }
+  .Services::after{
+    width: 1px;
+    height: calc(100% + 1.25rem);
+  }
+  .Services::before{
+   width: calc(100% - 2rem);
+   height: 1px;
+  }
+}
+
+@layer utilities {
+  .scrollbar-medium::-webkit-scrollbar {
+    @apply w-1;
+  }
+  .flex-center{
+    @apply flex justify-center items-center
+  }
+  .flex-between{
+    @apply flex justify-between items-center
+  }
+  .MoreFeaturesBG{
+   background: #F9FAFC url("../Images/bg-point.png") no-repeat fixed right -600px center/auto;
+  }
+  /* Bubbles */
+  .bubble-animate {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+  }
+  
+  .bubble-animate .circle {
+    background: #13c4a1;
+    bottom: 0;
+    position: absolute;
+    border-radius: 50%;
+  }
+  
+  .bubble-animate .circle.small {
+    width: 20px;
+    height: 20px;
+    opacity: 0;
+  }
+  
+  .bubble-animate .circle.small.square1 {
+    left: 18%;
+    top: 100%;
+    -webkit-animation-name: smallBubble;
+            animation-name: smallBubble;
+    -webkit-animation-duration: 3s;
+            animation-duration: 3s;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+    -webkit-animation-delay: 1s;
+            animation-delay: 1s;
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  
+  .bubble-animate .circle.small.square2 {
+    left: 36%;
+    top: 100%;
+    -webkit-animation-name: smallBubble;
+            animation-name: smallBubble;
+    -webkit-animation-duration: 4s;
+            animation-duration: 4s;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+    -webkit-animation-delay: 2s;
+            animation-delay: 2s;
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  
+  .bubble-animate .circle.small.square3 {
+    left: 54%;
+    top: 100%;
+    -webkit-animation-name: smallBubble;
+            animation-name: smallBubble;
+    -webkit-animation-duration: 5s;
+            animation-duration: 5s;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+    -webkit-animation-delay: 1s;
+            animation-delay: 1s;
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  
+  .bubble-animate .circle.small.square4 {
+    left: 72%;
+    top: 100%;
+    -webkit-animation-name: smallBubble;
+            animation-name: smallBubble;
+    -webkit-animation-duration: 6s;
+            animation-duration: 6s;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+    -webkit-animation-delay: 4s;
+            animation-delay: 4s;
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  
+  .bubble-animate .circle.small.square5 {
+    left: 90%;
+    top: 100%;
+    -webkit-animation-name: smallBubble;
+            animation-name: smallBubble;
+    -webkit-animation-duration: 7s;
+            animation-duration: 7s;
+    -webkit-animation-delay: 5s;
+            animation-delay: 5s;
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  
+  .bubble-animate .circle.medium {
+    width: 40px;
+    height: 40px;
+    opacity: 0.35;
+  }
+  
+  .bubble-animate .circle.medium.square1 {
+    left: 21%;
+    top: 100%;
+    -webkit-animation-name: mediumBubble;
+            animation-name: mediumBubble;
+    -webkit-animation-duration: 5s;
+            animation-duration: 5s;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+    -webkit-animation-delay: 2s;
+            animation-delay: 2s;
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  
+  .bubble-animate .circle.medium.square2 {
+    left: 42%;
+    top: 100%;
+    -webkit-animation-name: mediumBubble;
+            animation-name: mediumBubble;
+    -webkit-animation-duration: 8s;
+            animation-duration: 8s;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+    -webkit-animation-delay: 6s;
+            animation-delay: 6s;
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  
+  .bubble-animate .circle.medium.square3 {
+    left: 63%;
+    top: 100%;
+    -webkit-animation-name: mediumBubble;
+            animation-name: mediumBubble;
+    -webkit-animation-duration: 12s;
+            animation-duration: 12s;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+    -webkit-animation-delay: 12s;
+            animation-delay: 12s;
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  
+  .bubble-animate .circle.medium.square4 {
+    left: 84%;
+    top: 100%;
+    -webkit-animation-name: mediumBubble;
+            animation-name: mediumBubble;
+    -webkit-animation-duration: 4s;
+            animation-duration: 4s;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+    -webkit-animation-delay: 12s;
+            animation-delay: 12s;
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  
+  .bubble-animate .circle.medium.square5 {
+    left: 105%;
+    top: 100%;
+    -webkit-animation-name: mediumBubble;
+    animation-name: mediumBubble;
+    -webkit-animation-duration: 18s;
+    animation-duration: 18s;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-delay: 6s;
+    animation-delay: 6s;
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+  
+  .bubble-animate .circle.large {
+    width: 100px;
+    height: 100px;
+    opacity: 0.15;
+  }
+  
+  .bubble-animate .circle.large.square1 {
+    left: 21%;
+    top: 100%;
+    -webkit-animation-name: bigBubble;
+            animation-name: bigBubble;
+    -webkit-animation-duration: 6s;
+            animation-duration: 6s;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+    -webkit-animation-delay: 6s;
+            animation-delay: 6s;
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  
+  .bubble-animate .circle.large.square2 {
+    left: 42%;
+    top: 100%;
+    -webkit-animation-name: bigBubble;
+            animation-name: bigBubble;
+    -webkit-animation-duration: 6s;
+            animation-duration: 6s;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+    -webkit-animation-delay: 3s;
+            animation-delay: 3s;
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  
+  .bubble-animate .circle.large.square3 {
+    left: 63%;
+    top: 100%;
+    -webkit-animation-name: bigBubble;
+            animation-name: bigBubble;
+    -webkit-animation-duration: 6s;
+            animation-duration: 6s;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+    -webkit-animation-delay: 13s;
+            animation-delay: 13s;
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  
+  .bubble-animate .circle.large.square4 {
+    left: 84%;
+    top: 100%;
+    -webkit-animation-name: bigBubble;
+            animation-name: bigBubble;
+    -webkit-animation-duration: 6s;
+            animation-duration: 6s;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+    -webkit-animation-delay: 9s;
+            animation-delay: 9s;
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  
+  .bubble-animate .circle.large.square5 {
+    left: 105%;
+    top: 100%;
+    -webkit-animation-name: bigBubble;
+            animation-name: bigBubble;
+    -webkit-animation-duration: 6s;
+            animation-duration: 6s;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+    -webkit-animation-delay: 13s;
+            animation-delay: 13s;
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  
+  @-webkit-keyframes smallBubble {
+    0% {
+      top: 100%;
+      margin-left: 10px;
+    }
+    25% {
+      margin-left: -10px;
+    opacity: 0.7;
+    }
+    50% {
+      margin-left: 10px;
+    }
+    75% {
+      margin-left: -10px;
+    }
+    100% {
+      top: 0%;
+      opacity: 0;
+      margin-left: 0px;
+    }
+  }
+  
+  @keyframes smallBubble {
+    0% {
+      top: 100%;
+      margin-left: 10px;
+    }
+    25% {
+      margin-left: -10px;
+    }
+    50% {
+      margin-left: 10px;
+    }
+    75% {
+      margin-left: -10px;
+    }
+    100% {
+      top: 0%;
+      opacity: 0;
+      margin-left: 0px;
+    }
+  }
+  
+  @-webkit-keyframes mediumBubble {
+    0% {
+      top: 100%;
+      margin-left: 15px;
+    }
+    25% {
+      margin-left: -15px;
+    }
+    50% {
+      margin-left: 15px;
+    }
+    75% {
+      margin-left: -15px;
+    }
+    100% {
+      top: 0%;
+      opacity: 0;
+      margin-left: 0px;
+    }
+  }
+  
+  @keyframes mediumBubble {
+    0% {
+      top: 100%;
+      margin-left: 15px;
+    }
+    25% {
+      margin-left: -15px;
+    }
+    50% {
+      margin-left: 15px;
+    }
+    75% {
+      margin-left: -15px;
+    }
+    100% {
+      top: 0%;
+      opacity: 0;
+      margin-left: 0px;
+    }
+  }
+  
+  @-webkit-keyframes bigBubble {
+    0% {
+      top: 100%;
+      margin-left: 20px;
+    }
+    25% {
+      margin-left: -20px;
+    }
+    50% {
+      margin-left: 20px;
+    }
+    75% {
+      margin-left: -20px;
+    }
+    100% {
+      top: 0%;
+      opacity: 0;
+      margin-left: 0px;
+    }
+  }
+  
+  @keyframes bigBubble {
+    0% {
+      top: 100%;
+      margin-left: 20px;
+    }
+    25% {
+      margin-left: -20px;
+    }
+    50% {
+      margin-left: 20px;
+    }
+    75% {
+      margin-left: -20px;
+    }
+    100% {
+      top: 0%;
+      opacity: 0;
+      margin-left: 0px;
+    }
+  }
+}
+
+.css-1c99szj-MuiRating-icon{
+  @apply text-gray-300 dark:text-gray-400
+}
+.css-iljtu2-MuiRating-root {
+  direction: ltr;
+}
+
+.css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper{
+  right: 0;
+  left: -13px !important;
+  margin: 0 auto;
+}
+.css-heg063-MuiTabs-flexContainer{
+  @apply overflow-x-scroll lg:overflow-x-auto;
+}
