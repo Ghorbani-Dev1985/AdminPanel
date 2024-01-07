@@ -1,24 +1,15 @@
 
 import { Toaster } from 'react-hot-toast'
-import { Route, Routes } from 'react-router-dom'
-import Layout from './Components/Layout/Layout'
-import HomePage from './Pages/Home/Home'
-import Login from './Pages/Panel/Login'
-import Panel from './Pages/Panel/Panel'
+import routes from './Routes'
+import { useRoutes } from 'react-router-dom'
 
 function App() {
-
+  let router = useRoutes(routes)
 
   return (
     <>
      <Toaster />
-    <Routes>
-        <Route path='/login' element={<Login />} />
-        <Route path='/panel' element={<Panel />} />
-      <Route element={<Layout />} >
-        <Route path='/' element={<HomePage />} />
-        </Route>
-    </Routes>
+      {router}
     </>
   )
 }
