@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
-
-let UserSchema = mongoose.Schema({
+const adminSchema = mongoose.Schema({
     firstName : {
         type: String,
         require: true,
@@ -15,13 +14,6 @@ let UserSchema = mongoose.Schema({
         maxLength: 100,
         trim: true
     },
-    phoneNumber : {
-        type: Number,
-        require: true,
-        minLength: 10,
-        maxLength: 11,
-        trim: true
-    },
     userName : {
         type: String,
         require: true,
@@ -33,9 +25,13 @@ let UserSchema = mongoose.Schema({
         require: true,
         minLength: 8,
         trim: true
-    }
+    },
+    task: {
+        type: String,
+        maxLength: 100
+    },
 })
 
-let Users = mongoose.model('Users' , UserSchema);
+const Admin = mongoose.model('admins' , adminSchema)
 
-module.exports = Users;
+module.exports = Admin;

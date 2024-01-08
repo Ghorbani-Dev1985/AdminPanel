@@ -10,7 +10,7 @@ function HomePage() {
     <>
     
      <Features />
-    <Chart grid title="فروش ماهانه" data={xAxiosData} dataKey="Sale" />
+    <Chart grid title="فروش ماهانه" data={xAxiosData} dataKey="فروش" />
     </>
   );
 }
