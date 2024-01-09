@@ -18,7 +18,7 @@ export default Features
 
 const Feature = ({title , number , percent  }) => {
     return(
-      <Box className="bg-white shadow rounded-lg p-2">
+      <Box className="bg-white shadow-round rounded-lg p-2">
       <p className='font-MorabbaBold text-3xl text-zinc-700 mb-2'>{title}</p>
       <Box className="w-full flex-between my-3">
        <span className='flex items-center font-DanaBold dir-ltr'>  
@@ -29,7 +29,7 @@ const Feature = ({title , number , percent  }) => {
        </span>
        <span className='flex-center gap-1 font-DanaBold text-3xl'> {(+number).toLocaleString()} <img src={Toman} alt='ghorbani-dev.ir' className='size-5' /></span>
       </Box>
-      <p className='text-gray-300 text-center'>مقایسه با ماه گذشته</p>
+      <p className='text-gray-400 text-center'>مقایسه با ماه گذشته</p>
       </Box>
     )
 }

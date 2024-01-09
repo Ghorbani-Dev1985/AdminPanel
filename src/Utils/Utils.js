@@ -49,4 +49,28 @@ let xAxiosData = [
     },
 ]
 
-export {xAxiosData}
+
+const newMembers = [
+    {
+        id: 1,
+        userName: 'moh1985',
+        title: 'توسعه دهنده فرانت',
+    },
+    {
+        id: 2,
+        userName: 'miladNiry232',
+        title: ' فول استک دولوپر',
+    },
+    {
+        id: 3,
+        userName: 'jadiMir123',
+        title: '  فول استک دولوپر',
+    },
+    {
+        id: 4,
+        userName: 'nilods5456',
+        title: 'طراح رابط کاربری',
+    },
+]
+
+export {xAxiosData , newMembers}

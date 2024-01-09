@@ -15,6 +15,13 @@ let UserSchema = mongoose.Schema({
         maxLength: 100,
         trim: true
     },
+    title : {
+        type: String,
+        require: true,
+        minLength: 3,
+        maxLength: 100,
+        trim: true
+    },
     phoneNumber : {
         type: Number,
         require: true,

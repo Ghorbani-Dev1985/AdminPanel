@@ -35,6 +35,7 @@ userRouter.put('/update', (req , res) => {
     let userUpdateInfo = {
         firstName : body.firstName,
         lastName: body.lastName,
+        title: body.title,
         userName: body.userName,
         password: body.password,
     }
@@ -49,6 +50,7 @@ userRouter.post('/newUser', (req , res) => {
     let newUserInfo = {
         firstName : body.firstName,
         lastName: body.lastName,
+        title: body.title,
         userName: body.userName,
         password: body.password,
     }

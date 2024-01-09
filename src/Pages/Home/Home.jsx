@@ -4,6 +4,7 @@ import { Box } from "@mui/material";
 import Features from "../../Components/Features/Features";
 import Chart from "../../Components/common/Chart/Chart";
 import {xAxiosData} from '../../Utils/Utils'
+import NewMemberInfos from "../../Components/NewMemberInfos/NewMemberInfos";
 
 function HomePage() {
   return (
@@ -11,6 +12,7 @@ function HomePage() {
     
      <Features />
     <Chart grid title="فروش ماهانه" data={xAxiosData} dataKey="فروش" />
+    <NewMemberInfos />
     </>
   );
 }

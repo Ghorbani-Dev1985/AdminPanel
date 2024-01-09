@@ -5,12 +5,12 @@ import {ResponsiveContainer , LineChart , Line , XAxis , CartesianGrid, Tooltip}
 
 function Chart({title , data , dataKey , grid}) {
   return (
-    <Box className="my-5">
-      <h3>{title}</h3>
+    <Box className="my-8 shadow-round p-2 rounded-lg">
+      <h3 className='my-3'>{title}</h3>
       <ResponsiveContainer width="100%" aspect={4}>
         <LineChart data={data} >
             <XAxis dataKey="name" stroke='#5550bd'/>
-            <Line dataKey={dataKey} stroke='#5550bd'/>
+            <Line type="monotone" dataKey={dataKey} stroke='#5550bd'/>
             <Tooltip />
             {
                 grid && <CartesianGrid stroke='#c0dfdf' strokeDasharray="10" />
