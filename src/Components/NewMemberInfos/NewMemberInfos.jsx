@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-// import {newMembers} from '../../Utils/Utils'
+import {BaseURL} from '../../Utils/Utils'
 import { Box } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -10,10 +10,9 @@ function NewMemberInfos() {
     const [users , setUsers] = useState([])
     useEffect(() => {
     axios
-    .get('http://localhost:8000/api/users/all')
+    .get(`${BaseURL}users/all`)
     .then(response => setUsers(response.data))
     } , [users]);
-    console.log(users)
   return (
     <Box className="my-8 shadow-round p-2 rounded-lg">
       <h3 className='my-4'>کاربران جدید</h3>

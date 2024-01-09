@@ -3,9 +3,9 @@ import React from 'react'
 import {ResponsiveContainer , LineChart , Line , XAxis , CartesianGrid, Tooltip} from 'recharts'
 
 
-function Chart({title , data , dataKey , grid}) {
+function Chart({key, title , data , dataKey , grid}) {
   return (
-    <Box className="my-8 shadow-round p-2 rounded-lg">
+    <Box key={key} className="my-8 shadow-round p-2 rounded-lg">
       <h3 className='my-3'>{title}</h3>
       <ResponsiveContainer width="100%" aspect={4}>
         <LineChart data={data} >
