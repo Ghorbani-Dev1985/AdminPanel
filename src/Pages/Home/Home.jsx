@@ -5,6 +5,7 @@ import Features from "../../Components/Features/Features";
 import Chart from "../../Components/common/Chart/Chart";
 import {BaseURL} from '../../Utils/Utils'
 import NewMemberInfos from "../../Components/NewMemberInfos/NewMemberInfos";
+import LastTransactions from '../../Components/LastTransactions/LastTransactions'
 import axios from "axios";
 
 function HomePage() {
@@ -20,7 +21,10 @@ function HomePage() {
     
      <Features />
     <Chart grid title="فروش ماهانه" key={xAxiosData} data={xAxiosData} dataKey="sale" />
+    <Box className="flex justify-normal gap-4">
     <NewMemberInfos />
+    <LastTransactions />
+    </Box>
     </>
   );
 }

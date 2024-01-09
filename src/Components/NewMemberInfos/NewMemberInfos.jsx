@@ -14,7 +14,7 @@ function NewMemberInfos() {
     .then(response => setUsers(response.data))
     } , [users]);
   return (
-    <Box className="my-8 shadow-round p-2 rounded-lg">
+    <Box className="flex flex-col flex-1 my-8 shadow-round p-2 rounded-lg">
       <h3 className='my-4'>کاربران جدید</h3>
       {
         users.slice(0 , 4).map(({id, userName ,title}) => {
