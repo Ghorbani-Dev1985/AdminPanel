@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Avatar, Box, Skeleton } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
@@ -34,7 +34,8 @@ function lastTransactions() {
   return (
     <Box className="flex flex-col flex-[2] my-8 shadow-round p-2 rounded-lg">
       <h3 className="my-4"> تراکنش های اخیر</h3>
-      <TableContainer component={Paper}>
+      {
+        transactions.length ?   <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
             <TableRow>
@@ -62,9 +63,33 @@ function lastTransactions() {
             )}
           </TableBody>
         </Table>
-      </TableContainer>
+      </TableContainer> : <ListSkeleton listsToRender={6}/>
+      }
+    
     </Box>
   );
 }
 
 export default lastTransactions;
+
+
+
+const ListSkeleton = ({listsToRender}) => {
+  return (
+    <>
+    {
+      Array(listsToRender)
+      .fill(1)
+      .map((card, index) => (
+        <React.Fragment key={index}> 
+        
+     <Skeleton animation="wave" className='w-full h-10'/>
+               
+          </React.Fragment>
+        ))
+      }
+      </>
+  );
+};
+
+export {ListSkeleton}
