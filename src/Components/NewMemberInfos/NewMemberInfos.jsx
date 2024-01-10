@@ -4,11 +4,11 @@ import { Avatar, Box, Skeleton } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import axios from 'axios';
+import UserSkeleton from '../common/UsersSkeleton/UserSkeleton';
 
 
 function NewMemberInfos() {
     const [users , setUsers] = useState([])
-    let showLoading = 4
     useEffect(() => {
     axios
     .get(`${BaseURL}users/all`)
@@ -32,7 +32,7 @@ function NewMemberInfos() {
                 </div>
             )
         })
-        :  <ListSkeleton listsToRender={4}/>
+        :  <UserSkeleton listsToRender={4}/>
       }
     </Box>
   )
@@ -41,24 +41,3 @@ function NewMemberInfos() {
 export default NewMemberInfos
 
 
-const ListSkeleton = ({listsToRender}) => {
-  return (
-    <>
-    {
-      Array(listsToRender)
-      .fill(1)
-      .map((card, index) => (
-        <React.Fragment key={index}> 
-          <div className='w-full flex-center gap-1 my-1'>
-          <Skeleton variant="circular">
-          <Avatar />
-        </Skeleton> <Skeleton animation="wave" className='w-full h-12'/>
-               </div>
-          </React.Fragment>
-        ))
-      }
-      </>
-  );
-};
-
-export {ListSkeleton}

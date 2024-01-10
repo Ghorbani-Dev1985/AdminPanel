@@ -15,7 +15,6 @@ function HomePage() {
   .get(`${BaseURL}xAxiosData/all`)
   .then(response => setXAxiosData(response.data))
   } , []);
-  console.log(xAxiosData)
   return (
     <>
     
