@@ -4,36 +4,58 @@ import { DataGrid ,faIR} from '@mui/x-data-grid';
 import axios from 'axios';
 import { BaseURL } from '../../Utils/Utils';
 import UsersSkeleton from '../../Components/common/UsersSkeleton/UserSkeleton'
-const columns = [ 
-  {
-    field: 'id',
-    headerName: 'ردیف',
-    width: 60,
-  },
-  {
-    field: 'firstName',
-    headerName: 'نام',
-    width: 100,
-  },
-  {
-    field: 'lastName',
-    headerName: 'نام خانوادگی',
-    width: 150,
-  },
-  {
-    field: 'userName',
-    headerName: 'نام کاربری',
-    width: 190,
-  },
-  {
-    field: 'title',
-    headerName: 'عنوان تخصص ',
-    width: 300,
-  }
-]
+import { DeleteOutlineOutlined } from '@mui/icons-material';
+
 
 function Users() {
   const [users , setUsers] = useState([])
+  const [userID , setUserID] = useState('')
+  const [showDeleteUserDialog, setShowDeleteUserDialog] = useState(false);
+
+
+  
+  const columns = [ 
+    {
+      field: 'id',
+      headerName: 'ردیف',
+      width: 60,
+    },
+    {
+      field: 'firstName',
+      headerName: 'نام',
+      width: 100,
+    },
+    {
+      field: 'lastName',
+      headerName: 'نام خانوادگی',
+      width: 150,
+    },
+    {
+      field: 'userName',
+      headerName: 'نام کاربری',
+      width: 190,
+    },
+    {
+      field: 'title',
+      headerName: 'عنوان تخصص ',
+      width: 300,
+    },
+    { 
+      field: "deleteAction",
+      headerName: 'حذف', width: 60 ,
+      renderCell: (user) => {
+        return (
+            <div onClick={() => {
+              setShowDeleteUserDialog(true)
+              setUserID(user.id)
+            }} className="flex-center cursor-pointer text-rose-500">
+                <DeleteOutlineOutlined />
+             </div>
+        );
+     }
+    },
+  ]
+
   useEffect(() => {
   axios
   .get(`${BaseURL}users/all`)
