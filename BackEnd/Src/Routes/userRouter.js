@@ -5,7 +5,6 @@ const userRouter = express.Router()
 // ** Get All Users APi
 userRouter.get('/all', (req , res) => {
     UserModel.find({}).then(allUsers => {
-        console.log(allUsers)
         res.json(allUsers)
     })
 })
@@ -22,7 +21,6 @@ userRouter.get('/user', (req , res) => {
 // ** Delete Main User APi
 userRouter.delete('/delete', (req , res) => {
     let userID = req.headers.authorization
-   console.log(userID)
     UserModel.findByIdAndDelete(`${userID}`).then(result => {
         res.send(true)
     })
