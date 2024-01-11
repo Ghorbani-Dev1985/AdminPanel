@@ -22,7 +22,7 @@ userRouter.get('/user', (req , res) => {
 // ** Delete Main User APi
 userRouter.delete('/delete', (req , res) => {
     let userID = req.headers.authorization
-
+   console.log(userID)
     UserModel.findByIdAndDelete(`${userID}`).then(result => {
         res.send(true)
     })
