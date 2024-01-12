@@ -27,12 +27,12 @@ function Users() {
   const [showError, setShowError] = useState(false);
   const [notFirstNameValidError, setFirstNameShowNotValidError] =
     useState(false);
-  const [notLastNameValidError, setLastNameShowNotValidError] = useState(false);
-  const [notTitleValidError, setTitleShowNotValidError] =
+  const [lastNameNotValidError, setLastNameShowNotValidError] = useState(false);
+  const [titleNotValidError, setTitleShowNotValidError] =
     useState(false);
-    const [notUserNameValidError, setUserNameShowNotValidError] =
+    const [userNameNotValidError, setUserNameShowNotValidError] =
     useState(false);
-    const [notPasswordValidError, setPasswordShowNotValidError] =
+    const [passwordNotValidError, setPasswordShowNotValidError] =
     useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const columns = [ 
@@ -283,9 +283,9 @@ function Users() {
                       <span className="text-rose-500 text-sm">*</span>
                     </span>
                   }
-                  error={notLastNameValidError && true}
+                  error={lastNameNotValidError && true}
                   helperText={
-                    notLastNameValidError && (
+                    lastNameNotValidError && (
                       <span className="text-rose-500">
                         لطفا حداقل چهار کاراکتر وارد نمایید
                       </span>
@@ -314,9 +314,9 @@ function Users() {
                       <span className="text-rose-500 text-sm">*</span>
                     </span>
                   }
-                  error={notTitleValidError && true}
+                  error={titleNotValidError && true}
                   helperText={
-                    notTitleValidError && (
+                    titleNotValidError && (
                       <span className="text-rose-500">
                         لطفا حداقل یازده عدد وارد نمایید
                       </span>
@@ -347,9 +347,9 @@ function Users() {
                   }
                   variant="outlined"
                   size="small"
-                  error={notUserNameValidError && true}
+                  error={userNameNotValidError && true}
                   helperText={
-                    notUserNameValidError && (
+                    userNameNotValidError && (
                       <span className="text-rose-500">
                         لطفا حداقل شش کاراکتر وارد نمایید
                       </span>
@@ -377,9 +377,9 @@ function Users() {
                   }
                   variant="outlined"
                   size="small"
-                  error={notPasswordValidError && true}
+                  error={passwordNotValidError && true}
                   helperText={
-                    notPasswordValidError && (
+                    passwordNotValidError && (
                       <span className="text-rose-500">
                         لطفا حداقل هشت کاراکتر وارد نمایید
                       </span>
