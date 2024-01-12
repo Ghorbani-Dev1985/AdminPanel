@@ -36,14 +36,15 @@ import {
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import RtlProvider from "../../Components/common/RtlProvider/RtlProvider";
+import useFetch from "../../Hooks/useFetch";
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 function Products() {
-  const [products, setProducts] = useState([]);
   const [getProductsData, setGetProductsData] = useState(false);
+  const {datas : products} = useFetch("products/all" , "" , getProductsData)
   const [productID, setProductID] = useState("");
   const [showUpdateProductDialog, setShowUpdateProductDialog] = useState(false);
   const [productTitle, setProductTitle] = useState("");
@@ -247,13 +248,6 @@ function Products() {
       toast.error("لطفا فرم را تکمیل نمایید");
     }
   };
-
-  useEffect(() => {
-    axios
-      .get(`${BaseURL}products/all`)
-      .then((response) => setProducts(response.data));
-  }, [getProductsData]);
-
   // Show edit product infos in dialog form
   useEffect(() => {
     let filteredUpdateProduct = products.find(

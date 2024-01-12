@@ -5,16 +5,11 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import axios from 'axios';
 import UserSkeleton from '../common/UsersSkeleton/UserSkeleton';
+import useFetch from '../../Hooks/useFetch';
 
 
 function NewMemberInfos() {
-    const [users , setUsers] = useState([])
-    useEffect(() => {
-    axios
-    .get(`${BaseURL}users/all`)
-    .then(response => setUsers(response.data))
-    } , [users]);
-    
+    const {datas : users} = useFetch("users/all")
   return (
     <Box className="flex flex-col flex-1 my-8 shadow-round p-2 rounded-lg">
       <h3 className='my-4'>کاربران جدید</h3>

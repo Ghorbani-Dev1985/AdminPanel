@@ -11,6 +11,7 @@ import Paper from "@mui/material/Paper";
 import axios from "axios";
 import { BaseURL } from "../../Utils/Utils";
 import Toman from '../../assets/Images/svgs/toman-black.svg'
+import useFetch from "../../Hooks/useFetch";
 
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -25,12 +26,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 function lastTransactions() {
-  const [transactions, setTransactions] = useState([]);
-  useEffect(() => {
-    axios
-      .get(`${BaseURL}transaction/all`)
-      .then((response) => setTransactions(response.data));
-  }, []);
+    const {datas : transactions } = useFetch("transaction/all")
   return (
     <Box className="flex flex-col flex-[2] my-8 shadow-round p-2 rounded-lg">
       <h3 className="my-4"> تراکنش های اخیر</h3>

@@ -8,14 +8,15 @@ import { AccountCircle, AssignmentInd, DeleteOutlineOutlined, Edit, Person, Visi
 import Swal from 'sweetalert2';
 import toast from 'react-hot-toast';
 import RtlProvider from '../../Components/common/RtlProvider/RtlProvider'
+import useFetch from '../../Hooks/useFetch';
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 function Users() {
-  const [users , setUsers] = useState([])
-  const [getUsersData , setGetUsersData] = useState(false)
+ const [getUsersData , setGetUsersData] = useState(false)
+ const {datas : users} = useFetch("users/all" , "" , getUsersData)
   const [userID , setUserID] = useState('')
   const [showPassword, setShowPassword] = useState(false);
   const [showUpdateUserDialog, setShowUpdateUserDialog] = useState(false);
@@ -195,12 +196,6 @@ function Users() {
     }
    
   }
-
-  useEffect(() => {
-  axios
-  .get(`${BaseURL}users/all`)
-  .then(response => setUsers(response.data))
-  } , [getUsersData]);
 
     // Show edit user infos in dialog form
     useEffect(() => {
