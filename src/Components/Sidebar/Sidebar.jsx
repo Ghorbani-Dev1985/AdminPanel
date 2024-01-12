@@ -14,6 +14,7 @@ import MessageIcon from '@mui/icons-material/Message';
 import TextsmsIcon from '@mui/icons-material/Textsms';
 import InsightsIcon from '@mui/icons-material/Insights';
 import SummarizeIcon from '@mui/icons-material/Summarize';
+import FiberNewIcon from '@mui/icons-material/FiberNew';
 
 let DashboardLinks = [
     {
@@ -54,6 +55,12 @@ let QuickMenuLinks = [
         to: "/products",
         linkText: " محصولات",
         linkIcon: <ProductionQuantityLimitsRoundedIcon />,
+    },
+    {
+        id: 4,
+        to: "/newProduct",
+        linkText: " محصولات جدید",
+        linkIcon: <FiberNewIcon />,
     },
     {
         id: 4,
