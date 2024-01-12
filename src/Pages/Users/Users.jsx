@@ -49,21 +49,21 @@ function Users() {
     {
       field: 'lastName',
       headerName: 'نام خانوادگی',
-      width: 150,
+      width: 200,
     },
     {
       field: 'userName',
       headerName: 'نام کاربری',
-      width: 190,
+      width: 250,
     },
     {
       field: 'title',
       headerName: 'عنوان تخصص ',
-      width: 300,
+      width: 400,
     },
     {
       field: 'editAction',
-     headerName: 'ویرایش', width: 60 ,
+     headerName: 'ویرایش', width: 120 ,
     renderCell: (user) => {
       return (
           <div onClick={() => {
@@ -77,7 +77,7 @@ function Users() {
   },
     { 
       field: "deleteAction",
-      headerName: 'حذف', width: 60 ,
+      headerName: 'حذف', width: 120 ,
       renderCell: (user) => {
         return (
             <div onClick={() => {deleteUserHandler(user.id)}} className="flex-center cursor-pointer text-rose-500">
