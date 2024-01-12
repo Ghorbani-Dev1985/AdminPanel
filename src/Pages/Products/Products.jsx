@@ -101,9 +101,10 @@ function Products() {
       headerName: "قیمت با تخفیف",
       width: 150,
       renderCell: (product) => {
+        console.log(product)
         return (
           <div className="flex-center gap-1">
-            {product.row.price.toLocaleString()}
+            {product.row.discountPrice.toLocaleString()}
             <img
               src="src/assets/Images/svgs/toman-black.svg"
               className="size-4"

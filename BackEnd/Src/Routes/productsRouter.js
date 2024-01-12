@@ -46,10 +46,11 @@ productRouter.put("/update", (req, res) => {
 // ** Add New Product APi
 productRouter.post("/newProduct", (req, res) => {
   let body = req.body;
+  let date = new Date().toLocaleDateString('fa-IR');
   let newProductInfo = {
     productTitle: body.productTitle,
     productImg: body.productImg,
-    CREATED_AT : new Date().toLocaleDateString('fa-IR'),
+    CREATED_AT : date,
     price: body.price,
     discountPrice: body.discountPrice,
     stock: body.stock,

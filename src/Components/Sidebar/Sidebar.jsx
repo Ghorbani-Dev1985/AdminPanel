@@ -59,11 +59,11 @@ let QuickMenuLinks = [
     {
         id: 4,
         to: "/newProduct",
-        linkText: " محصولات جدید",
+        linkText: " محصول جدید",
         linkIcon: <FiberNewIcon />,
     },
     {
-        id: 4,
+        id: 5,
         to: "/r",
         linkText: " تراکنش‌ها",
         linkIcon: <PaidRoundedIcon />,
