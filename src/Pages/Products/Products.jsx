@@ -51,7 +51,6 @@ function Products() {
       headerName: 'تصویر',
       width: 100,
       renderCell: (product) => {
-        console.log(product.row)
         return (
           <img src={`${product.row.productImg}`} className='size-20 p-3 object-fill rounded-lg ' alt='ghorbani-dev.ir' />
         );
@@ -121,13 +120,43 @@ function Products() {
       headerName: 'حذف', width: 90 ,
       renderCell: (product) => {
         return (
-            <div onClick={() => {deleteUserHandler(product.id)}} className="flex-center cursor-pointer text-rose-500">
+            <div onClick={() => {deleteProductHandler(product.id)}} className="flex-center cursor-pointer text-rose-500">
                 <DeleteOutlineOutlined />
              </div>
         );
      }
     },
   ]
+  
+  const deleteProductHandler = (productID) => {
+    console.log(productID)
+    Swal.fire({
+      title: "آیا برای حذف محصول مطمعن هستید؟",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#f43f5e",
+      cancelButtonColor: "#0ea5e9",
+      confirmButtonText: "تایید",
+      cancelButtonText: 'انصراف'
+    }).then((result) => {
+      if (result.isConfirmed) {
+       axios.delete(`${BaseURL}products/delete` , {
+        headers : {
+          authorization : productID
+        }
+       })
+       .then(response => {
+        toast.success('محصول مورد نظر با موفقیت حذف گردید')
+        setGetProductsData(prev => !prev)
+        console.log(response)
+       })
+       .catch((error) => {
+        toast.error('حذف محصول انجام نشد')
+        console.log(error)
+       })
+      }
+    });
+}
 
   useEffect(() => {
     axios
