@@ -1,10 +1,10 @@
 import React, { forwardRef, useEffect, useState } from 'react'
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, InputAdornment, Slide, TextField } from '@mui/material'
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, FormLabel, IconButton, InputAdornment, Radio, RadioGroup, Slide, TextField } from '@mui/material'
 import { DataGrid ,faIR} from '@mui/x-data-grid';
 import axios from 'axios';
 import { BaseURL } from '../../Utils/Utils';
 import UsersSkeleton from '../../Components/common/UsersSkeleton/UserSkeleton'
-import { AccountCircle, AssignmentInd, DeleteOutlineOutlined, Edit, Person, Visibility, VisibilityOff } from '@mui/icons-material';
+import { AccountCircle, AssignmentInd, DeleteOutlineOutlined, Edit, Image, Inventory, MonetizationOn, MoneyOff, Person, Subtitles, Visibility, VisibilityOff } from '@mui/icons-material';
 import Swal from 'sweetalert2';
 import toast from 'react-hot-toast';
 import RtlProvider from '../../Components/common/RtlProvider/RtlProvider'
@@ -17,7 +17,6 @@ function Products() {
   const [products , setProducts] = useState([])
   const [getProductsData , setGetProductsData] = useState(false)
   const [productID , setProductID] = useState('')
-  const [showPassword, setShowPassword] = useState(false);
   const [showUpdateProductDialog, setShowUpdateProductDialog] = useState(false);
   const [productTitle, setProductTitle] = useState("");
   const [productImg, setProductImg] = useState("");
@@ -25,16 +24,7 @@ function Products() {
   const [discountPrice, setDiscountPrice] = useState("");
   const [stock, setStock] = useState("");
   const [productType, setProductType] = useState(false);
-  const [productTitleNotValidError, setProductTitleNotValidError] =
-    useState(false);
-  const [priceNotValidError, setPriceNotValidError] = useState(false);
-  const [discountPriceNotValidError, setDiscountPriceNotValidError] =
-    useState(false);
-    const [stockNotValidError, setStockNotValidError] =
-    useState(false);
-    const [productTypeNotValidError, setProductTypeNotValidError] =
-    useState(false);
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const [productTitleNotValidError, setProductTitleNotValidError] = useState(false);
   const columns = [ 
     {
       field: 'id',
@@ -97,7 +87,7 @@ function Products() {
       width: 100,
       renderCell: (product) => {
         return(
-          product.row.productType ? "ساده" : "متغییر"
+          product.row.productType ? "متغییر" : "ساده"
         )
      }
     },
@@ -107,8 +97,8 @@ function Products() {
     renderCell: (product) => {
       return (
           <div onClick={() => {
-            setShowUpdateUserDialog(true)
-            setUserID(product.id)
+            setShowUpdateProductDialog(true)
+            setProductID(product.id)
           }} className="flex-center cursor-pointer text-sky-500">
               <Edit />
            </div>
@@ -157,15 +147,79 @@ function Products() {
       }
     });
 }
-
+  
+const productTitleInputHandler = (event) => {
+  setProductTitle(event.target.value);
+  if (productTitle.length < 3) {
+    setProductTitleShowNotValidError(true);
+  } else {
+    setProductTitleShowNotValidError(false);
+  }
+}
+ 
+const userUpdateHandler = async () => {
+  let productUpdateInfos = {
+    productTitle,
+    productImg,
+    price,
+    stock,
+    discountPrice,
+    productType
+  };
+  if (productTitle && price && discountPrice && stock &&  productTitle.length > 3 ) {
+    console.log(productUpdateInfos)
+await axios
+  .put(`${BaseURL}products/update` , productUpdateInfos , {
+    headers : {
+      authorization : productID
+    }
+  })
+  .then(response => {
+    toast.success("  محصول مورد نظر با موفقیت ویرایش گردید");
+    setShowUpdateProductDialog(false)
+    setGetProductsData(prev => !prev)
+    setProductTitle('')
+        setProductImg('')
+        setPrice('')
+        setStock('')
+        setDiscountPrice('')
+        setProductType('')
+    console.log(response)
+  })
+  .catch((error) => {
+    toast.error(" ویرایش محصول انجام نشد");
+    console.log(error);
+  });
+  }else{
+    toast.error("لطفا فرم را تکمیل نمایید");
+  }
+ 
+}
+ 
   useEffect(() => {
     axios
     .get(`${BaseURL}products/all`)
     .then(response => setProducts(response.data))
     } , [getProductsData]);
 
+   // Show edit product infos in dialog form
+   useEffect(() => {
+     console.log(products)
+    let filteredUpdateProduct = products.find(product => product._id === productID)
+    console.log(filteredUpdateProduct)
+    if(filteredUpdateProduct){
+      setProductTitle(filteredUpdateProduct.productTitle)
+      setProductImg(filteredUpdateProduct.productImg)
+      setPrice(filteredUpdateProduct.price)
+      setStock(filteredUpdateProduct.stock)
+      setDiscountPrice(filteredUpdateProduct.discountPrice)
+      setProductType(filteredUpdateProduct.productType)
+    }
+  }, [productID])
 
   return (
+     <>
+     
     <Box>
       <h2 className='font-MorabbaBold mb-8'>لیست محصولات</h2>
      {
@@ -179,6 +233,160 @@ function Products() {
       }} disableRowSelectionOnClick pageSizeOptions={[5]}/> :  <UsersSkeleton listsToRender={4}/>
      }
     </Box>
+       <RtlProvider>
+       {/* Edit Product Dialog */}
+       <Dialog
+              open={showUpdateProductDialog}
+              TransitionComponent={Transition}
+              keepMounted
+              onClose={() => setShowUpdateProductDialog(false)}
+              aria-describedby="alert-dialog-slide-description"
+            >
+              <DialogTitle className='flex-center !font-MorabbaBold'>{" ویرایش اطلاعات محصول"}</DialogTitle>
+                <form className='w-full'>
+              <DialogContent className='flex flex-col gap-4'>      
+              <TextField
+                        id="RegisterProductTitle"
+                        value={productTitle}
+                        onChange={(event) => productTitleInputHandler(event)}
+                        autoComplete='off'
+                        label={
+                          <span>
+                            عنوان محصول <span className="text-rose-500 text-sm">*</span>
+                          </span>
+                        }
+                        error={productTitleNotValidError && true}
+                        helperText={
+                          productTitleNotValidError && (
+                            <span className="text-rose-500">
+                              لطفا حداقل سه کاراکتر وارد نمایید
+                            </span>
+                          )
+                        }
+                        variant="outlined"
+                        size="small"
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <IconButton edge="end">
+                                <Subtitles />
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                      <TextField
+                        id="RegisterproductImg"
+                        value={productImg}
+                        onChange={(event) => setProductImg(event.target.value)}
+                        autoComplete='off'
+                        label={
+                          <span>
+                             تصویر
+                          </span>
+                        }
+                       
+                        variant="outlined"
+                        size="small"
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <IconButton edge="end">
+                                <Image />
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                      <TextField
+                        id="price"
+                        value={(price).toLocaleString()}
+                        onChange={(event) => setPrice(event.target.value)}
+                        autoComplete='off'
+                        size="small"
+                        label={
+                          <span>
+                            قیمت
+                            <span className="text-rose-500 text-sm">*</span>
+                          </span>
+                        }
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <IconButton edge="end">
+                                <MonetizationOn />
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                      <TextField
+                        id="RegisterDiscountPrice"
+                        value={(discountPrice).toLocaleString()}
+                        onChange={(event) => setDiscountPrice(event.target.value)}
+                        autoComplete='off'
+                        size="small"
+                        label={
+                          <span>
+                            قیمت با تخفیف
+                            <span className="text-rose-500 text-sm">*</span>
+                          </span>
+                        }
+                         InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <IconButton edge="end">
+                                <MoneyOff />
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                      <TextField
+                        id="RegisterPassword"
+                        value={stock}
+                        size="small"
+                        type='number'
+                        onChange={(event) => setStock(event.target.value)}
+                        label={
+                          <span>
+                             موجودی <span className="text-rose-500 text-sm">*</span>
+                          </span>
+                        }
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <IconButton edge="end">
+                                <Inventory />
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                         <Box className="flex-center gap-2">
+                          <FormLabel id="demo-controlled-radio-buttons-group">نوع محصول</FormLabel>
+      <RadioGroup
+        aria-labelledby="demo-controlled-radio-buttons-group"
+        name="controlled-radio-buttons-group"
+        value={productType}
+        onChange={(event) => setProductType(event.target.value)}
+      >
+        <Box className="flex-center">
+        <FormControlLabel value={false} onChange={(event) => setProductType(event.target.value)} control={<Radio />} label="ساده" />
+        <FormControlLabel value={true} onChange={(event) => setProductType(event.target.value)} control={<Radio />} label="متغییر" />
+        </Box>
+      </RadioGroup>
+                         </Box>
+                         
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={() => setShowUpdateProductDialog(false)} className='!text-zinc-800'>انصراف</Button>
+                <Button onClick={() => userUpdateHandler()}>ثبت</Button>
+              </DialogActions>
+                </form>
+            </Dialog>
+          </RtlProvider>
+          </>
   )
 }
 
